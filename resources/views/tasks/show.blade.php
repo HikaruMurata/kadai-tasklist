@@ -8,7 +8,7 @@
     <table class="table table-bordered">
         <tr>
             <th>id</th>
-            <td>{{ $task->id }}</td>
+            <td>{{ $tasks->id }}</td>
         </tr>
         <tr>
             <th>ステータス</th>
@@ -19,6 +19,7 @@
             <td>{{ $tasks->content }}</td>
         </tr>
     </table>
+    
     {!! link_to_route('tasks.edit', 'このメッセージ編集', ['id' => $task->id], ['class' => 'btn btn-default']) !!}
 
     {!! Form::model($tasks, ['route' => ['tasks.destroy', $tasks->id], 'method' => 'delete']) !!}
