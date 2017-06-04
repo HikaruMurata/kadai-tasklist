@@ -5,13 +5,23 @@
 <!-- ここにページ毎のコンテンツを書く -->
 <h1>id = {{ $tasks->id }} のタスク詳細ページ</h1>
     
-    <p>ステータス: {{ $tasks->status }}</p>
-    <p>メッセージ: {{ $tasks->content }}</p>
-    
-     {!! link_to_route('tasks.edit', 'このメッセージ編集', ['id' => $tasks->id]) !!}
-     
-      {!! Form::model($tasks, ['route' => ['tasks.destroy', $tasks->id], 'method' => 'delete']) !!}
-        {!! Form::submit('削除') !!}
-    {!! Form::close() !!}
+    <table class="table table-bordered">
+        <tr>
+            <th>id</th>
+            <td>{{ $task->id }}</td>
+        </tr>
+        <tr>
+            <th>ステータス</th>
+            <td>{{ $tasks->title }}</td>
+        </tr>
+        <tr>
+            <th>メッセージ</th>
+            <td>{{ $tasks->content }}</td>
+        </tr>
+    </table>
+    {!! link_to_route('tasks.edit', 'このメッセージ編集', ['id' => $task->id], ['class' => 'btn btn-default']) !!}
 
+    {!! Form::model($tasks, ['route' => ['tasks.destroy', $tasks->id], 'method' => 'delete']) !!}
+        {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
+    {!! Form::close() !!}
 @endsection
