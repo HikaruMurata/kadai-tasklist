@@ -20,7 +20,7 @@
         </tr>
     </table>
     
-    {!! link_to_route('tasks.edit', 'このメッセージ編集', ['id' => $task->id], ['class' => 'btn btn-default']) !!}
+    {!! link_to_route('tasks.edit', 'このメッセージ編集', ['id' => $tasks->id], ['class' => 'btn btn-default']) !!}
 
     {!! Form::model($tasks, ['route' => ['tasks.destroy', $tasks->id], 'method' => 'delete']) !!}
         {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
