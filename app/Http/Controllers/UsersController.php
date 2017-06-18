@@ -30,7 +30,7 @@ class UsersController extends Controller
             'tasks' => $tasks,
         ];
         
-        $data += $this->counts($user);
+        $data = $this->counts($user);
         return view('users.show', $data);
     }
 }
