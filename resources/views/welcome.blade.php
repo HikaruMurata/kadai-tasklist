@@ -6,13 +6,20 @@
     @if (Auth::check())
         <?php $user = Auth::user(); ?>
         <div class="row">
-            <aside class="col-md-4">
+            <aside class="col-xs-4">
+                {!! Form::open(['route' => 'tasks.store']) !!}
+                    <div class="form-group">
+                        {!! Form::textarea('content', old('content'), ['class' => 'form-control', 'rows' => '5']) !!}
+                    </div>
+                    {!! Form::submit('Post', ['class' => 'btn btn-primary btn-block']) !!}
+                {!! Form::close() !!}
             </aside>
             <div class="col-xs-8">
                  
                 @if (count($tasks) > 0)
                     
                     @include('tasks.index', ['tasks' => $tasks])
+                    @include('tasks.tasks', ['tasks' => $tasks])
                 @else
                     {!! link_to_route('tasks.create', '新規メッセージの投稿', null, ['class' => 'btn btn-primary']) !!}
                 @endif

@@ -56,6 +56,7 @@ class tasksController extends Controller
             'status' => $request->status,
         ]);
         
+        
 
         return redirect('/');
     }
@@ -122,8 +123,13 @@ class tasksController extends Controller
     public function destroy($id)
     {
         $tasks = tasks::find($id);
-        $tasks->delete();
+        
+        if (\Auth::user()->id === $tasks->user_id) {
+             $tasks->delete();
+        
+        }
+        
 
-        return redirect('/');
+        return redirect()->back();
     }
 }
