@@ -14,6 +14,7 @@ class User extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
                                     CanResetPasswordContract
 {
+    
     use Authenticatable, Authorizable, CanResetPassword;
 
     /**
@@ -36,9 +37,15 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+    
+    public function tasks()
+    {
+        return $this->hasMany(task::class);
+    }
 }
-User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+
+
+        
+        
+        
+        

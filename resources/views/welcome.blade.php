@@ -1,48 +1,23 @@
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
         @extends('layouts.app')
 
 @section('content')
     @if (Auth::check())
         <?php $user = Auth::user(); ?>
-        {{ $user->name }}
+        <div class="row">
+            <aside class="col-md-4">
+            </aside>
+            <div class="col-xs-8">
+                 
+                @if (count($tasks) > 0)
+                    
+                    @include('tasks.index', ['tasks' => $tasks])
+                @else
+                    {!! link_to_route('tasks.create', '新規メッセージの投稿', null, ['class' => 'btn btn-primary']) !!}
+                @endif
+            </div>
+        </div>
     @else
         <div class="center jumbotron">
             <div class="text-center">
@@ -53,5 +28,4 @@
     @endif
 @endsection
 
-    </body>
-</html>
+    

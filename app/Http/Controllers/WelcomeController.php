@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\tasks; 
 
-class tasksController extends Controller
+class WelcomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,11 +16,17 @@ class tasksController extends Controller
      */
     public function index()
     {
-        $tasks = tasks::all();
-
-        return view('tasks.index', [
-            'tasks' => $tasks,
-        ]);
+        $data = [];
+        if (\Auth::check()) {
+            $user = \Auth::user();
+            $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
+            //ver_damp($tasks);
+            $data = [
+                'user' => $user,
+                'tasks' => $tasks,
+            ];
+        }
+        return view('welcome', $data);
     }
 
     /**
@@ -31,11 +36,7 @@ class tasksController extends Controller
      */
     public function create()
     {
-        $tasks = new tasks;
-
-        return view('tasks.create', [
-            'tasks' => $tasks,
-        ]);
+        //
     }
 
     /**
@@ -46,18 +47,7 @@ class tasksController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'status' => 'required|max:255',   
-            'content' => 'required|max:255',
-        ]);
-//dd($request);
-         $request->user()->tasks()->create([
-            'content' => $request->content,
-            'status' => $request->status,
-        ]);
-        
-
-        return redirect('/');
+        //
     }
 
     /**
@@ -68,11 +58,7 @@ class tasksController extends Controller
      */
     public function show($id)
     {
-        $tasks = tasks::find($id);
-
-        return view('tasks.show', [
-            'tasks' => $tasks,
-        ]);
+        //
     }
 
     /**
@@ -83,11 +69,7 @@ class tasksController extends Controller
      */
     public function edit($id)
     {
-        $tasks = tasks::find($id);
-
-        return view('tasks.edit', [
-            'tasks' => $tasks,
-        ]);
+        //
     }
 
     /**
@@ -99,18 +81,7 @@ class tasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'status' => 'required|max:255',   
-            'content' => 'required|max:255',
-        ]);
-        
-        
-        $tasks = tasks::find($id);
-        $tasks->status = $request->status; 
-        $tasks->content = $request->content;
-        $tasks->save();
-
-        return redirect('/');
+        //
     }
 
     /**
@@ -121,9 +92,6 @@ class tasksController extends Controller
      */
     public function destroy($id)
     {
-        $tasks = tasks::find($id);
-        $tasks->delete();
-
-        return redirect('/');
+        //
     }
 }
