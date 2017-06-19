@@ -70,7 +70,7 @@ class tasksController extends Controller
     public function show($id)
     {
         $tasks = tasks::find($id);
-
+       
         return view('tasks.show', [
             'tasks' => $tasks,
         ]);
@@ -130,6 +130,7 @@ class tasksController extends Controller
         }
         
 
-        return redirect()->back();
+        //return redirect()->back();
+         return redirect('/');
     }
 }
