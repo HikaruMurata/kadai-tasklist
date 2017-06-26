@@ -53,7 +53,7 @@ class tasksController extends Controller
 //dd($request);
          $request->user()->tasks()->create([
             'content' => $request->content,
-            'status' => $request->status,
+            'status' => $request->status, 
         ]);
         
         
